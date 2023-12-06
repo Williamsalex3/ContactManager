@@ -7,22 +7,41 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ContactManager.Data;
 using ContactManager.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace ContactManager.Controllers
 {
+
+    [Authorize]//donne page d'identification si on n'est pas connecte
     public class ContactController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;//connexion a la DB
+        private readonly UserManager<IdentityUser> _userManager;// etape 1
 
-        public ContactController(ApplicationDbContext context)
+        public ContactController(ApplicationDbContext context, UserManager<IdentityUser> userManager)//etape 2
         {
             _context = context;
+            _userManager = userManager;//etape 3
+        }
+
+        //4
+        private Task<IdentityUser?> GetCurrentUserAsync()
+        {
+            return _userManager.GetUserAsync(HttpContext.User);
         }
 
         // GET: Contact
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Contact.Include(c => c.Categorie);
+            var user = await GetCurrentUserAsync();//etape 5
+            if(user == null)
+            {
+                return NotFound();
+            }
+
+            var applicationDbContext = _context.Contact.Include(c => c.Categorie)
+                .Where(c=>c.UserId == user.Id);//etape 6
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -74,10 +93,16 @@ namespace ContactManager.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ContactId,Prenom,Nom,Adresse,Ville,Province,CodePostal,Telephone,Courriel,DateCreation,CategorieID,UserName")] Contact contact)
+        public async Task<IActionResult> Create([Bind("ContactId,Prenom,Nom,Adresse,Ville,Province,CodePostal,Telephone,Courriel,DateCreation,CategorieID,UserName,UserID")] Contact contact)
         {
             if (ModelState.IsValid)
             {
+                var user = await GetCurrentUserAsync();//etape 5
+                if (user == null)
+                {
+                    return NotFound();
+                }
+                contact.UserId = user.Id;//etape 6
                 _context.Add(contact);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -110,6 +135,7 @@ namespace ContactManager.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ContactId,Prenom,Nom,Adresse,Ville,Province,CodePostal,Telephone,Courriel,DateCreation,CategorieID,UserName")] Contact contact)
         {
+
             if (id != contact.ContactId)
             {
                 return NotFound();
@@ -142,6 +168,7 @@ namespace ContactManager.Controllers
         // GET: Contact/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
+            var user = await GetCurrentUserAsync();//etape 5
             if (id == null)
             {
                 return NotFound();
@@ -149,7 +176,7 @@ namespace ContactManager.Controllers
 
             var contact = await _context.Contact
                 .Include(c => c.Categorie)
-                .FirstOrDefaultAsync(m => m.ContactId == id);
+                .FirstOrDefaultAsync(c => c.ContactId == id &&c.UserId == user.Id);
             if (contact == null)
             {
                 return NotFound();

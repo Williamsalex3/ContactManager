@@ -31,6 +31,9 @@ namespace ContactManager.Models
         [Required]
         public int CategorieID { get; set; }//Foreign Key
 
+        [StringLength(450)]//meme taille que reference dans DB
+        public string? UserId { get; set; }//pour authorisation AspNet user(Id)
+
         [Required]
         public string? UserName { get; set; }
         //proprietes de navigation
