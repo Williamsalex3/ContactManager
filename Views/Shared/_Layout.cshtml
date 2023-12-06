@@ -7,6 +7,10 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/ContactManager.styles.css" asp-append-version="true" />
+
+    @* jquery datatables *@
+    @* refere au link juste au besoin *@
+    @await RenderSectionAsync("CSS", required: false)
 </head>
 <body>
     <header>
@@ -28,7 +32,8 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Contact" asp-action="Index">Contacts</a>
                         </li>
-                        @* ajouter view componant (menuwidget) avant ul ferme *@
+
+                        @* ajouter view componant (menuwidget) *@
                         @await Component.InvokeAsync("MenuWidget")
                     </ul>
                     <partial name="_LoginPartial" />

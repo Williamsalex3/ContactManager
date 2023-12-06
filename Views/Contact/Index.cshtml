@@ -4,13 +4,37 @@
     ViewData["Title"] = "Index";
 }
 
+@* Datatables *@
+@section CSS
+{
+    <link href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css" rel=" ="stylesheet/>
+}
+
+
+@section Scripts
+{
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+    <script>
+    $('#contactTable').DataTable({
+        "columnDefs":
+        [
+            {
+                "orderable": false,"targets":-1@*on veut que la derniere colonne ne soit pas triée*@
+            }
+        ],
+        "lengthMenu" : [[5,10,25,50,-1],[5,10,25,50,"Tous"]]@*nombre d'elements dans la liste*@
+            });
+    </script>
+}
+
 <h1>Contact</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
 </p>
 
-<table class="table table-info" >
+<table class="table table-light" id="contactTable">
     <thead >
         <tr>
             <th>
