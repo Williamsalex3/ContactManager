@@ -1,8 +1,38 @@
-﻿@{
+﻿@model IEnumerable<ContactManager.Models.Contact>
+@{
     ViewData["Title"] = "Accueil";
 }
+
 
 <div class="text-center">
     <h1 class="display-4">Gestionnaire de contacts</h1>
     @* <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p> *@
+</div>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Catégories</h3>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">Gérer vos catégories</p>
+                    <a asp-action="Index" asp-controller="Categorie" class="btn btn-light">Catégories</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Contacts</h3>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">Gérer vos contacts</p>
+                    <a asp-action="Index" asp-controller="Contact" class="btn btn-light">Contacts</a>
+                </div>
+            </div>
+        </div>
+        
+    </div>
 </div>

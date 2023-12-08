@@ -6,16 +6,16 @@
 
 <h1>Categories</h1>
 
-<p>
+@* <p>
     <a asp-action="Create">Create New</a>
-</p>
+</p> *@
 <table class="table table-light text-light">
     <thead>
         <tr >
             <th>
                 @Html.DisplayNameFor(model => model.CategorieName)
             </th>
-            <th></th>
+            
         </tr>
     </thead>
     <tbody>
@@ -24,11 +24,11 @@
             <td>
                 @Html.DisplayFor(modelItem => item.CategorieName)
             </td>
-            <td>
+            @* <td>
                 <a asp-action="Edit" asp-route-id="@item.CategorieID">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.CategorieID">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.CategorieID">Delete</a>
-            </td>
+            </td> *@
         </tr>
 }
     </tbody>

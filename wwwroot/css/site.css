@@ -24,3 +24,6 @@ body {
 a{
     color:white;
 }
+ul.pagination {
+    btn btn-primary;
+}

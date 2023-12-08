@@ -19,9 +19,10 @@ namespace ContactManager.Models
 
         public string CodePostal { get; set; }
 
-
+        [DataType(DataType.PhoneNumber)]
         public string Telephone { get; set; }
 
+        [DataType(DataType.EmailAddress)]
         public string Courriel { get; set; }
 
         [Required]
@@ -34,8 +35,9 @@ namespace ContactManager.Models
         [StringLength(450)]//meme taille que reference dans DB
         public string? UserId { get; set; }//pour authorisation AspNet user(Id)
 
-        [Required]
-        public string? UserName { get; set; }
+        //[Required]
+        //public string? UserName { get; set; }
+
         //proprietes de navigation
         public Categorie? Categorie { get; set;}
 

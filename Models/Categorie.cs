@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace ContactManager.Models
 {
@@ -6,6 +7,7 @@ namespace ContactManager.Models
     {
         public int CategorieID { get; set; }
         [Required]
+        [DisplayNameAttribute("Categorie")]
         public string? CategorieName { get; set; }
 
 

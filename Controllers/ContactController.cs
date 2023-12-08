@@ -73,7 +73,10 @@ namespace ContactManager.Controllers
             var contact = await _context.Contact
                 .Include(c => c.Categorie)
                 .FirstOrDefaultAsync(m => m.ContactId == id);
-            if (contact == null)
+
+            // on arrure que contact existe et utilisateur est connecte
+            var user = await GetCurrentUserAsync();
+            if (contact == null || contact.UserId != user.Id)
             {
                 return NotFound();
             }
@@ -119,11 +122,17 @@ namespace ContactManager.Controllers
                 return NotFound();
             }
 
-            var contact = await _context.Contact.FindAsync(id);
-            if (contact == null)
+            var contact = await _context.Contact
+                .Include(c => c.Categorie)
+                .FirstOrDefaultAsync(c => c.ContactId == id);
+
+            // on arrure que contact existe et utilisateur est connecte
+            var user = await GetCurrentUserAsync();
+            if (contact == null || contact.UserId != user.Id)
             {
                 return NotFound();
             }
+
             ViewData["CategorieID"] = new SelectList(_context.Categorie, "CategorieID", "CategorieName", contact.CategorieID);
             return View(contact);
         }

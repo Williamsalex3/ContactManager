@@ -7,9 +7,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ContactManager.Data;
 using ContactManager.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ContactManager.Controllers
 {
+
+    [Authorize]//doit etre connecte pour voir les categories 
     public class CategorieController : Controller
     {
         private readonly ApplicationDbContext _context;

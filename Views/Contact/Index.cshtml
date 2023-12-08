@@ -20,7 +20,7 @@
         "columnDefs":
         [
             {
-                "orderable": false,"targets":-1@*on veut que la derniere colonne ne soit pas triée*@
+                "orderable": true,"targets":-1@*on veut que la derniere colonne ne soit pas triée*@
             }
         ],
         "lengthMenu" : [[5,10,25,50,-1],[5,10,25,50,"Tous"]]@*nombre d'elements dans la liste*@
@@ -64,9 +64,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.DateCreation)
             </th>
-            <th>
+            @* <th>
                 @Html.DisplayNameFor(model => model.UserName)
-            </th>
+            </th> *@
             <th>
                 @Html.DisplayNameFor(model => model.Categorie)
             </th>
@@ -103,9 +103,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.DateCreation)
             </td>
-            <td>
+            @* <td>
                 @Html.DisplayFor(modelItem => item.UserName)
-            </td>
+            </td> *@
             <td>
                 @Html.DisplayFor(modelItem => item.Categorie.CategorieName)
             </td>
@@ -118,3 +118,4 @@
 }
     </tbody>
 </table>
+
