@@ -7,7 +7,7 @@
 @* Datatables *@
 @section CSS
 {
-    <link href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css" rel=" ="stylesheet/>
+    <link href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css" rel="stylesheet"/>
 }
 
 
@@ -20,7 +20,7 @@
         "columnDefs":
         [
             {
-                "orderable": true,"targets":-1@*on veut que la derniere colonne ne soit pas triée*@
+                "orderable": false,"targets":-1@*on veut que la derniere colonne ne soit pas triée*@
             }
         ],
         "lengthMenu" : [[5,10,25,50,-1],[5,10,25,50,"Tous"]]@*nombre d'elements dans la liste*@
@@ -35,7 +35,7 @@
 </p>
 
 <table class="table table-light" id="contactTable">
-    <thead >
+    <thead class="table-dark">
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Prenom)

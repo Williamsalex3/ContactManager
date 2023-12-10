@@ -24,6 +24,16 @@ body {
 a{
     color:white;
 }
-ul.pagination {
-    btn btn-primary;
+#login-submit {
+    background-color: #ADB5BD;
+}
+.page-link{
+    background-color:#ADB5BD!important;
+}
+    .page-link.active, .active > .page-link {
+        background-color: #303030 !important;
+    }
+.btn-primary 
+{
+    background-color: #ADB5BD;
 }
